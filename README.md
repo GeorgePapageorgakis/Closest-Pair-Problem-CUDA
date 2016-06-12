@@ -1,2 +1,18 @@
-# Closest-Pair-Problem-CUDA
-Parallelization of Closest Pair Problem with CUDA API
+###Closest Pair problem
+
+The [closest pair of points](https://en.wikipedia.org/wiki/Closest_pair_of_points_problem) problem or closest pair problem is a problem of computational geometry:
+given n points in metric space, find a pair of points with the smallest distance between them. The closest pair problem for points in the Euclidean plane[1] was among the first geometric problems which were treated at the origins of the systematic study of the computational complexity of geometric algorithms.
+
+The problem may be solved in O(n log n) time in a Euclidean space or Lp space of fixed dimension d. In the algebraic decision tree model of computation, the O(n log n) algorithm is optimal. The optimality follows from the observation that the element uniqueness problem is reducible to the closest pair problem: checking whether the minimal distance is 0 after the solving of the closest pair problem answers the question whether there are two coinciding points. In the computational model which assumes that the floor function is computable in constant time the problem can be solved in O(n log log n) time. If we allow randomization to be used together with the floor function, the problem can be solved in O(n) time.
+
+It is proved that the use of graphics processing units, in coordination with the central processing unit, can drastically improve the performance of intensive computing applications. The appropriate use of the GPU is still an open research topic. 
+
+One of the problems is the appropriate setting of the system’s parameters in executing a GPU kernel which is also a main topic of the current thesis. That said, given a program that accepts different parameters, we seek out the number of threads per block and the number of blocks in the grid, which will result in the minimum total running time. The objective of this work is the parallel design and implementation of a known problem of computational geometry in a two-dimensional space, the closest pair of points, using the graphics processing unit (GPU) with the NVidia CUDA API. 
+
+More specifically, a first analysis of the simple approach to the problem, ie control for each possible pair of points, executes at square asymptotic complexity. In the second and faster method, we analyze the approach of divide & conquer algorithm. Given a set of points in the plane S, our approach is to divide the whole set of points into two approximately sorted and equal parts (S1 and S2) for which we already have the adjacent distances, and then merge each half in linear time to get finally asymptotic complexity of O(nlogn). However, the real solution is far from obvious. It is possible that the desired pair might have a point in S1 and another one in S2, but it does not force us to examine all possible pairs of points. 
+
+The approach presented in this thesis is a bottom-up. The closest pair algorithm is a fundamental problem with many applications and a very important role in many algorithms. The study and the parallelization of the problem using a GPU can significantly reduce the execution time of the algorithm, thus providing the ideal solution for real-time systems and for applications with large data sets.The difficulties encountered in the parallel implementation of the algorithm relate extensively to the algorithm divide & conquer in identifying the candidate closest pairs calculated in one of the recursive calls, or a candidate closest pair of points with a point in the right batch and the other on the left batch. Furthermore, there were technical difficulties regarding the optimal use of the GPU device and are also analyzed concurrently with the measured results.
+
+Author: George Papageorgakis, 2013
+
+TODO: Fix redundancy bugs in sorting implementation algorithm that cause resorting from initial array in each step.
